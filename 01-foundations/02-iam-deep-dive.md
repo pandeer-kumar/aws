@@ -208,4 +208,9 @@ aws accessanalyzer check-access-not-granted --policy-document file://p.json \
 ## Further reading
 - AWS docs: *Policy evaluation logic* (the flowchart) and *Cross-account policy evaluation logic*.
 - AWS whitepaper: *Building a data perimeter on AWS*.
-- Netflix: *Repokid* (automated least privilege) and *ConsoleMe* (credential brokering), open-sourced by Netflix security. See [03-architecture-deep-dives/04-netflix-delivery-chaos-and-security.md](../03-architecture-deep-dives/04-netflix-cloud-security.md).
+- Netflix: *Repokid* (automated least privilege) and *ConsoleMe* (credential brokering), open-sourced by Netflix security. See [03-architecture-deep-dives/04-netflix-delivery-chaos-and-security.md](../03-architecture-deep-dives/04-netflix-delivery-chaos-and-security.md).
+
+<!-- nav -->
+---
+
+← [01 · Global Infrastructure: Regions, AZs, Edge, and the Control/Data Plane Split](01-global-infrastructure.md) · [🏠 Home](../README.md) · [03 · VPC & Networking: How Packets Actually Move in AWS](03-vpc-networking.md) →

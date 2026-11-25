@@ -127,3 +127,8 @@ Just-in-time elevated access: an Identity Center permission set (e.g. `ProdReadO
 Preventive: account-level Block Public Access via SCP (deny `s3:PutAccountPublicAccessBlock` changes), default encryption, RCPs restricting principals to the org. Detective: Config rules (`s3-bucket-public-read-prohibited`, `s3-bucket-server-side-encryption-enabled`) in an org conformance pack with an aggregator, plus Security Hub FSBP controls. Evidence: **Audit Manager** assessment reports. Show the control is enforced *and* continuously evaluated.
 
 </details>
+
+<!-- nav -->
+---
+
+← [02 · Infrastructure as Code & Safe Deployments](02-iac-and-deployments.md) · [🏠 Home](../README.md) · [04 · Resilience Engineering & Disaster Recovery](04-resilience-and-dr.md) →

@@ -146,3 +146,8 @@ Treat it like code: version prompts in Git, run the offline eval suite (golden c
 Likely a loop or context bloat (tool returning huge payloads that get appended each turn). Fixes: per-session token/time budgets enforced in the loop, truncate/summarize tool outputs, paginate tool results, prompt caching for the stable prefix, alarms on tokens per session (CloudWatch metrics from observability spans), and a kill switch.
 
 </details>
+
+<!-- nav -->
+---
+
+← [GenAI 02 · RAG on AWS: Bedrock Knowledge Bases and Building Your Own](02-rag-and-knowledge-bases.md) · [🏠 Home](../README.md) · [GenAI 04 · Building a Production GenAI Platform on AWS (Multi-Team, Multi-Account)](04-production-genai-platform.md) →

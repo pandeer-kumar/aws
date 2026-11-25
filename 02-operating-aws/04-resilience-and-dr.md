@@ -116,3 +116,8 @@ Warm standby or active/passive-hot in a second region. Aurora Global Database (l
 Timeouts set from its latency SLO; bounded retries with jitter (idempotent calls only) under a retry budget; circuit breaker; bulkhead (separate thread/connection pool so it can't exhaust the main pool); queue requests asynchronously if the product allows (SQS + worker with rate limit); cache responses where valid; degrade gracefully in the UI. Monitor their SLA vs reality and keep the contract evidence.
 
 </details>
+
+<!-- nav -->
+---
+
+← [03 · Security & Governance at Organization Scale](03-security-and-governance.md) · [🏠 Home](../README.md) · [05 · Cost Engineering (FinOps) for Engineers](05-cost-engineering.md) →

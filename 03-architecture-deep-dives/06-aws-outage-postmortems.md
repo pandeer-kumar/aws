@@ -114,3 +114,8 @@ DynamoDB DNS management automation
 - Feb 2017: https://aws.amazon.com/message/41926/
 - Paper: *Metastable Failures in Distributed Systems* (Bronson et al., HotOS 2021) and *Metastable Failures in the Wild* (OSDI 2022).
 - Paper: *How Amazon Web Services Uses Formal Methods* (CACM 2015).
+
+<!-- nav -->
+---
+
+← [Deep Dive 05 · Cell-Based Architecture & Shuffle Sharding (How AWS Limits Blast Radius)](05-cells-and-shuffle-sharding.md) · [🏠 Home](../README.md) · [Deep Dive 07 · Reference Architectures with Real Challenges](07-reference-architectures.md) →

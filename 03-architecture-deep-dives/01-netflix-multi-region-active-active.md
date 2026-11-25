@@ -185,3 +185,8 @@ Stateful tiers: cache hit rate (cold keys), database read/write capacity, connec
 - Ruslan Meshenberg, re:Invent ARC305 *How Netflix leverages multiple regions to increase availability* (2013).
 - Joseph Lynch, SREcon25 Americas *Techniques Netflix Uses to Weather Significant Demand Shifts* (four-region full-active).
 - AWS re:Invent 2022 *Netflix: Build resilient multi-site workloads* (AWS customer story).
+
+<!-- nav -->
+---
+
+← [05 · Cost Engineering (FinOps) for Engineers](../02-operating-aws/05-cost-engineering.md) · [🏠 Home](../README.md) · [Deep Dive 02 · Netflix Traffic Management: Zuul, Adaptive Concurrency, Prioritized Load Shedding](02-netflix-traffic-and-load-shedding.md) →

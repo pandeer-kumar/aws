@@ -89,3 +89,8 @@ Too few cells → big blast radius. Too many → operational overhead (more depl
 Short term: per-tenant rate limits and concurrency caps for heavy APIs; move exports to an async job queue with per-tenant fairness; bulkhead export workers from the interactive path. Medium term: shuffle-shard tenants over worker pools, so a poison tenant only affects a small set of others, with client-side retry across their shard. Long term: cell-based architecture (cell = account), router by tenant ID, largest tenants in dedicated cells, deploy cell-by-cell. Explain the blast-radius maths for each step.
 
 </details>
+
+<!-- nav -->
+---
+
+← [Deep Dive 04 · Netflix Delivery, Chaos Engineering & Cloud Security](04-netflix-delivery-chaos-and-security.md) · [🏠 Home](../README.md) · [Deep Dive 06 · Learning from AWS's Own Outages (Post-Event Summaries)](06-aws-outage-postmortems.md) →

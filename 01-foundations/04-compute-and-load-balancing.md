@@ -190,3 +190,8 @@ Hypotheses: GC pauses (check GC logs; container memory limits vs heap; use `-XX:
 - Firecracker paper (NSDI '20): *Firecracker: Lightweight Virtualization for Serverless Applications*.
 - AWS docs: *Troubleshoot your Application Load Balancers* (HTTP error codes).
 - Netflix Tech Blog: Titus container platform and *Predictive CPU isolation of containers at Netflix*.
+
+<!-- nav -->
+---
+
+← [03 · VPC & Networking: How Packets Actually Move in AWS](03-vpc-networking.md) · [🏠 Home](../README.md) · [05 · Storage: S3, EBS, EFS, FSx: How They Work and How They Fail](05-storage.md) →

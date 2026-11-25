@@ -87,3 +87,8 @@ Studio upload ─► S3 (multipart, Transfer Acceleration) ─► EventBridge "o
 
 ## Interview tip
 For any design: start with **requirements and numbers** (QPS, data size, latency, consistency, RTO/RPO). Then draw the happy path, then *say what breaks* (hot keys, retries, capacity, dependencies, regional failure) and how you'd detect and mitigate each. That "what breaks" section is what distinguishes 10-year engineers.
+
+<!-- nav -->
+---
+
+← [Deep Dive 06 · Learning from AWS's Own Outages (Post-Event Summaries)](06-aws-outage-postmortems.md) · [🏠 Home](../README.md) · [GenAI 01 · Amazon Bedrock: How Inference Works, Scales, and Fails](../04-genai-bedrock/01-bedrock-internals.md) →

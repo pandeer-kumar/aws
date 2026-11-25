@@ -194,3 +194,8 @@ aws ec2 create-network-insights-path --source i-aaa --destination i-bbb --protoc
 - re:Invent "Another day, another billion flows" (VPC internals, Hyperplane) and "A day in the life of a billion packets".
 - AWS whitepaper: *Building a Scalable and Secure Multi-VPC AWS Network Infrastructure*.
 - AWS docs: *Amazon EC2 instance network bandwidth* (PPS, conntrack allowances, ENA Express).
+
+<!-- nav -->
+---
+
+← [02 · IAM Deep Dive: How AWS Decides "Allow" or "Deny"](02-iam-deep-dive.md) · [🏠 Home](../README.md) · [04 · Compute & Load Balancing: EC2/Nitro, Auto Scaling, Containers, Lambda](04-compute-and-load-balancing.md) →

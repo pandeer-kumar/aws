@@ -136,3 +136,8 @@ Ask what the count is used for. Billing, quotas and legal reporting need exact c
 - *Netflix's Distributed Counter Abstraction* (Nov 2024); InfoQ coverage Dec 2024.
 - *Keystone Real-time Stream Processing Platform* (2018); *Evolution of the Netflix Data Pipeline* (2016).
 - QCon/InfoQ: *How Netflix Uses Data Abstraction to Operate Services at Scale*.
+
+<!-- nav -->
+---
+
+← [Deep Dive 02 · Netflix Traffic Management: Zuul, Adaptive Concurrency, Prioritized Load Shedding](02-netflix-traffic-and-load-shedding.md) · [🏠 Home](../README.md) · [Deep Dive 04 · Netflix Delivery, Chaos Engineering & Cloud Security](04-netflix-delivery-chaos-and-security.md) →

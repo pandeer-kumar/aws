@@ -108,3 +108,8 @@ Common root causes: table content lost in PDF parsing; acronyms not matching (ne
 - **Ops:** dashboards for retrieval latency, empty-result rate, guardrail intervention rate, cost per query.
 
 </details>
+
+<!-- nav -->
+---
+
+← [GenAI 01 · Amazon Bedrock: How Inference Works, Scales, and Fails](01-bedrock-internals.md) · [🏠 Home](../README.md) · [GenAI 03 · Agents on AWS: Bedrock Agents, AgentCore, MCP, and Running Agents in Production](03-agents-and-agentcore.md) →

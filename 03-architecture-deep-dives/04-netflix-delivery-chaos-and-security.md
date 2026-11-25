@@ -126,3 +126,8 @@ Prerequisites first: good observability with a business KPI, tested rollback, on
 - Netflix Tech Blog: *The Netflix Simian Army* (2011); *FIT: Failure Injection Testing* (2014); *ChAP: Chaos Automation Platform* (2017).
 - Book: *Chaos Engineering* (Casey Rosenthal & Nora Jones, O'Reilly), written by ex-Netflix chaos team members.
 - Netflix Tech Blog: *Netflix Cloud Security: Detecting Credential Compromise in AWS* (2018); *Introducing ConsoleMe* (2020); GitHub `Netflix/repokid`, `Netflix-Skunkworks/aardvark`.
+
+<!-- nav -->
+---
+
+← [Deep Dive 03 · Netflix Data Platform: EVCache, Data Abstraction Layers, Counters, Keystone](03-netflix-data-platform.md) · [🏠 Home](../README.md) · [Deep Dive 05 · Cell-Based Architecture & Shuffle Sharding (How AWS Limits Blast Radius)](05-cells-and-shuffle-sharding.md) →

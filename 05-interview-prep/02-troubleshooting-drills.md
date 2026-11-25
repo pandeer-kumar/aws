@@ -35,3 +35,8 @@ Cost Explorer → usage type: `DataProcessing-Bytes` (Logs ingestion) → which 
 
 ### Drill 10: "Terraform apply wants to destroy and recreate the production database."
 STOP. Look at the plan: the attribute forcing replacement (e.g. a changed `identifier`, `availability_zone`, engine version semantics, or a provider upgrade). Use `lifecycle { prevent_destroy = true; ignore_changes = [...] }`, a `moved` block for refactors, or `import` blocks. Never apply. Add a policy check that fails plans with deletes on stateful resources.
+
+<!-- nav -->
+---
+
+← [Senior AWS Question Bank (as asked when hiring someone with ~10 years of experience)](01-senior-question-bank.md) · [🏠 Home](../README.md) · [Hands-On Labs](../06-labs/README.md) →

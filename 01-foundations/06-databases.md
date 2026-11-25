@@ -157,3 +157,8 @@ RDS Blue/Green Deployments: create green (new major version, logical replication
 - Paper: *Amazon DynamoDB: A Scalable, Predictably Performant, and Fully Managed NoSQL Database Service* (USENIX ATC 2022).
 - Book: Alex DeBrie, *The DynamoDB Book* (single-table design).
 - Netflix: EVCache, KV Data Abstraction, see [03-netflix-data-platform.md](../03-architecture-deep-dives/03-netflix-data-platform.md).
+
+<!-- nav -->
+---
+
+← [05 · Storage: S3, EBS, EFS, FSx: How They Work and How They Fail](05-storage.md) · [🏠 Home](../README.md) · [07 · Messaging & Event-Driven Architecture: SQS, SNS, EventBridge, Kinesis, MSK, Step Functions](07-messaging-and-events.md) →

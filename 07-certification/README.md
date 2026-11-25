@@ -43,3 +43,8 @@ You chose the Professional track. Realistic path for a software engineer new to 
 - Official AWS Skill Builder exam prep and practice question sets.
 - AWS whitepapers: Well-Architected Framework (6 pillars) + lenses (Serverless, SaaS, **Generative AI lens**), *AWS Fault Isolation Boundaries*, *Disaster Recovery of Workloads on AWS*, *Organizing Your AWS Environment Using Multiple Accounts*.
 - Practice exams from reputable providers. Aim for 80%+ consistently before booking.
+
+<!-- nav -->
+---
+
+← [Hands-On Labs](../06-labs/README.md) · [🏠 Home](../README.md)

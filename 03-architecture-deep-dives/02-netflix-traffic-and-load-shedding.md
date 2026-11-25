@@ -134,3 +134,8 @@ Map each request type to user-visible impact. Ask: "If this fails, does a user n
 - Netflix Tech Blog: *Enhancing Netflix Reliability with Service-Level Prioritized Load Shedding* (June 2024); InfoQ coverage Nov 2024; QCon SF 2025 talk.
 - Netflix Tech Blog: *Pushy to the Limit: Evolving Netflix's WebSocket proxy for the future* (2024).
 - Builders' Library: *Using load shedding to avoid overload*.
+
+<!-- nav -->
+---
+
+← [Deep Dive 01 · Netflix: From One Data Center to Four-Region Active-Active on AWS](01-netflix-multi-region-active-active.md) · [🏠 Home](../README.md) · [Deep Dive 03 · Netflix Data Platform: EVCache, Data Abstraction Layers, Counters, Keystone](03-netflix-data-platform.md) →

@@ -116,3 +116,8 @@ Trunk-based, every merge deploys. Stages: build/test → integration in staging 
 S3 versioning on the state bucket → restore the previous version. Locking (DynamoDB table or S3 native locking) should have prevented concurrent applies. Use `terraform import` / `import` blocks to re-adopt resources, `state rm` for orphans, then `plan` to converge. Prevention: CI-only applies, plan-then-apply with the saved plan file, short-lived state access, separate state per stack/env.
 
 </details>
+
+<!-- nav -->
+---
+
+← [01 · Observability: Knowing What's Broken Before Customers Do](01-observability.md) · [🏠 Home](../README.md) · [03 · Security & Governance at Organization Scale](03-security-and-governance.md) →

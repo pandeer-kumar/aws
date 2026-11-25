@@ -133,3 +133,8 @@ Use conditional writes. Each writer creates `log/<seq>.json` with `If-None-Match
 - Werner Vogels blog *All Things Distributed*: "Diving deep on S3 consistency" (how S3 implemented strong consistency).
 - USENIX FAST '23 keynote: *Building and operating a pretty big storage system called S3* (Andy Warfield).
 - 2017 S3 outage (us-east-1) post-event summary: a mistyped command removed too much capacity. See [06-aws-outage-postmortems.md](../03-architecture-deep-dives/06-aws-outage-postmortems.md).
+
+<!-- nav -->
+---
+
+← [04 · Compute & Load Balancing: EC2/Nitro, Auto Scaling, Containers, Lambda](04-compute-and-load-balancing.md) · [🏠 Home](../README.md) · [06 · Databases: RDS, Aurora, DynamoDB, ElastiCache: Internals and Failure Modes](06-databases.md) →

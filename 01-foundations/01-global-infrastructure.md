@@ -180,3 +180,8 @@ aws account list-regions --region-opt-status-contains ENABLED ENABLED_BY_DEFAULT
 - Builders' Library: *Static stability using Availability Zones*.
 - Builders' Library: *Workload isolation using shuffle-sharding*.
 - AWS whitepaper: *Reducing the Scope of Impact with Cell-Based Architecture*.
+
+<!-- nav -->
+---
+
+[🏠 Home](../README.md) · [02 · IAM Deep Dive: How AWS Decides "Allow" or "Deny"](02-iam-deep-dive.md) →

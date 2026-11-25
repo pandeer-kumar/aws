@@ -133,3 +133,8 @@ Kinesis: serverless-ish, AWS-native IAM, shard model, simpler ops, 365-day reten
 - Builders' Library: *Avoiding insurmountable queue backlogs*; *Making retries safe with idempotent APIs*.
 - Netflix Tech Blog: *Keystone Real-time Stream Processing Platform* (2018). See [03-netflix-data-platform.md](../03-architecture-deep-dives/03-netflix-data-platform.md).
 - Gregor Hohpe, *Enterprise Integration Patterns*.
+
+<!-- nav -->
+---
+
+← [06 · Databases: RDS, Aurora, DynamoDB, ElastiCache: Internals and Failure Modes](06-databases.md) · [🏠 Home](../README.md) · [01 · Observability: Knowing What's Broken Before Customers Do](../02-operating-aws/01-observability.md) →

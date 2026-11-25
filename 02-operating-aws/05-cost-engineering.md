@@ -68,3 +68,8 @@ Account-per-team-per-env (cleanest attribution) + mandatory tags enforced by Tag
 1) NAT Gateway data processing. 2) Cross-AZ data transfer (replication, chatty microservices, cross-zone LB). 3) CloudWatch Logs ingestion + infinite retention. 4) Public IPv4 addresses ($0.005/hr each since 2024). 5) S3 request costs and lifecycle transition costs on billions of small objects. Bonus: KMS request costs, Config recorder in high-churn accounts, EBS snapshots of deleted volumes, data transfer to the internet without CloudFront, idle provisioned DynamoDB/Kinesis.
 
 </details>
+
+<!-- nav -->
+---
+
+← [04 · Resilience Engineering & Disaster Recovery](04-resilience-and-dr.md) · [🏠 Home](../README.md) · [Deep Dive 01 · Netflix: From One Data Center to Four-Region Active-Active on AWS](../03-architecture-deep-dives/01-netflix-multi-region-active-active.md) →

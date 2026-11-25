@@ -32,3 +32,8 @@ What broke / surprised you:
 Fixes & follow-ups:
 ```
 Put your lab code and reports in your own GitHub repo. It's a strong portfolio signal in interviews.
+
+<!-- nav -->
+---
+
+← [Troubleshooting Drills (Scenario Interviews)](../05-interview-prep/02-troubleshooting-drills.md) · [🏠 Home](../README.md) · [Certification Map: SAP-C02 (Solutions Architect – Professional) & DOP-C02 (DevOps Engineer – Professional)](../07-certification/README.md) →

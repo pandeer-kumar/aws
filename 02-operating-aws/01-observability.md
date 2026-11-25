@@ -100,3 +100,8 @@ Page only on SLO burn and a short list of imminent-harm causes. Every page must 
 CloudTrail: `eventName=DeleteSecurityGroup` with `requestParameters.groupId`, across the org trail (CloudTrail Lake SQL or Athena). Read `userIdentity` (assumed-role ARN + session name = the Identity Center user), `sourceIPAddress`, `userAgent`. AWS Config shows the resource timeline and its relationships before deletion. If the session name is generic (e.g. a CI role), trace back via `sts:AssumeRole` events to the source identity. Enforce `sts:SourceIdentity` for this reason.
 
 </details>
+
+<!-- nav -->
+---
+
+← [07 · Messaging & Event-Driven Architecture: SQS, SNS, EventBridge, Kinesis, MSK, Step Functions](../01-foundations/07-messaging-and-events.md) · [🏠 Home](../README.md) · [02 · Infrastructure as Code & Safe Deployments](02-iac-and-deployments.md) →

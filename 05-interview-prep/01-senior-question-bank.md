@@ -106,3 +106,8 @@ How to use this: for each question, answer **out loud in 2–3 minutes**, then o
 77. How do you make a platform that 50 teams *want* to adopt (paved road vs mandates)?
 
 > Tip: use the STAR format, but spend most of the time on *the technical decisions and trade-offs*. Senior interviewers probe "why not X?" Always have a rejected alternative ready.
+
+<!-- nav -->
+---
+
+← [GenAI 04 · Building a Production GenAI Platform on AWS (Multi-Team, Multi-Account)](../04-genai-bedrock/04-production-genai-platform.md) · [🏠 Home](../README.md) · [Troubleshooting Drills (Scenario Interviews)](02-troubleshooting-drills.md) →

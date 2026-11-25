@@ -143,3 +143,8 @@ Volume: 5,000 × 20 × 22 workdays = 2.2M queries/month. Tokens: 13.2B input, 1.
 SCP on the EU workload OU: deny `bedrock:InvokeModel*`/`Converse*` unless the resource is an `eu.` inference profile or an EU-region foundation model; deny `global.*` profiles. Keep Knowledge Bases, logs and vector stores in EU regions. Enforce VPC endpoint usage. Detect with Config/CloudTrail queries for non-EU profile ARNs.
 
 </details>
+
+<!-- nav -->
+---
+
+← [Deep Dive 07 · Reference Architectures with Real Challenges](../03-architecture-deep-dives/07-reference-architectures.md) · [🏠 Home](../README.md) · [GenAI 02 · RAG on AWS: Bedrock Knowledge Bases and Building Your Own](02-rag-and-knowledge-bases.md) →

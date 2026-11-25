@@ -51,3 +51,8 @@ Built on: API Gateway / ALB + ECS/Lambda, or LiteLLM-style proxies on EKS, or Ag
 Central AI gateway per region (ECS Fargate behind ALB with JWT/IAM auth), token-bucket quotas per team in DynamoDB/ElastiCache sized from the account's Bedrock TPM (reserve headroom for priority apps). Model allow-lists by data class. Default prompt caching and max_tokens limits. Guardrails baseline applied centrally, with stricter team-specific ones on top. Application inference profiles per team for native cost tags, plus gateway usage logs to S3/Athena for unit metrics. Failover: CRIS profiles + secondary region gateway + fallback model qualified by evals. Observability: per-team latency/TTFT/throttle/guardrail-intervention dashboards. A self-service onboarding pipeline creates the team's profile, quota and IAM role.
 
 </details>
+
+<!-- nav -->
+---
+
+← [GenAI 03 · Agents on AWS: Bedrock Agents, AgentCore, MCP, and Running Agents in Production](03-agents-and-agentcore.md) · [🏠 Home](../README.md) · [Senior AWS Question Bank (as asked when hiring someone with ~10 years of experience)](../05-interview-prep/01-senior-question-bank.md) →
