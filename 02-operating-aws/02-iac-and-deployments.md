@@ -106,9 +106,13 @@ Artifacts: ECR (cross-account pull policy, image scanning, signing w/ AWS Signer
 ## 7. Senior interview questions — model answers
 
 <details><summary><b>Q1. Design a deployment pipeline for a service in 6 regions with 99.99% SLO.</b></summary>
+
 Trunk-based, every merge deploys. Stages: build/test → integration in staging → prod wave 1 = one cell/one-box in the lowest-traffic region with ~1h bake + automated canary analysis → full region 1 → wave 2 = 2 regions in parallel (never both members of a failover pair at once) → wave 3 = rest. Auto-rollback on SLO burn, error and latency alarms, and on canary score. Freeze windows. Config changes through AppConfig with the same staged rollout and validators. Data migrations use expand/contract. The design keeps any bad change to ≤1 region's partial capacity, inside the error budget.
+
 </details>
 
 <details><summary><b>Q2. Terraform state got corrupted / someone applied an old plan. Recovery?</b></summary>
+
 S3 versioning on the state bucket → restore the previous version. Locking (DynamoDB table or S3 native locking) should have prevented concurrent applies. Use `terraform import` / `import` blocks to re-adopt resources, `state rm` for orphans, then `plan` to converge. Prevention: CI-only applies, plan-then-apply with the saved plan file, short-lived state access, separate state per stack/env.
+
 </details>

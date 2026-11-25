@@ -100,13 +100,19 @@ Full case study: [01-netflix-multi-region-active-active.md](../03-architecture-d
 ## 6. Senior interview questions — model answers
 
 <details><summary><b>Q1. "We need 99.99%." What does that mean operationally?</b></summary>
+
 52.6 minutes of downtime per year, about 4.3 min/month. You can't have humans in the detection-to-mitigation loop for every incident: paging plus diagnosis alone takes 15+ minutes. So you need automated detection and mitigation (auto rollback, zonal autoshift, health-check failover) and deployments that can't take down more than a fraction of capacity. Also, every hard dependency's availability multiplies: five dependencies at 99.99% each give ~99.95% if any one failing fails you. You need redundancy or graceful degradation per dependency, and **you can't exceed the availability of your critical dependencies** without isolating from them.
+
 </details>
 
 <details><summary><b>Q2. Design DR for a payments API: RPO ≤ 1s, RTO ≤ 5 min.</b></summary>
+
 Warm standby or active/passive-hot in a second region. Aurora Global Database (lag typically < 1s; managed failover) or DynamoDB global tables. Stateless compute pre-scaled to handle full load (or ≥ 50% + fast scaling with reserved capacity). ARC routing controls for the traffic switch (data plane). Idempotency keys so that clients retrying across the failover don't double-charge. Runbook automation with ARC Region switch. Quarterly failover drills measuring actual RTO/RPO. Explicitly document that RPO is "lag at failure time" and alarm if lag exceeds 1s.
+
 </details>
 
 <details><summary><b>Q3. Your service depends on a flaky third-party API. Make it resilient.</b></summary>
+
 Timeouts set from its latency SLO; bounded retries with jitter (idempotent calls only) under a retry budget; circuit breaker; bulkhead (separate thread/connection pool so it can't exhaust the main pool); queue requests asynchronously if the product allows (SQS + worker with rate limit); cache responses where valid; degrade gracefully in the UI. Monitor their SLA vs reality and keep the contract evidence.
+
 </details>

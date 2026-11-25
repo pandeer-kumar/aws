@@ -25,6 +25,7 @@
 - **S3 Express One Zone:** single-AZ directory buckets, single-digit-ms latency, up to hundreds of thousands of TPS per bucket. For ML training/analytics scratch.
 
 ### Storage classes and lifecycle
+
 | Class | Min duration | Retrieval | Use |
 |---|---|---|---|
 | Standard | — | ms | Hot |
@@ -64,6 +65,7 @@
 ```
 Instance ──NVMe──► Nitro card ──network──► EBS storage servers (replicated within ONE AZ)
 ```
+
 | Volume | IOPS | Throughput | Notes |
 |---|---|---|---|
 | **gp3** | 3,000 baseline, up to 16,000 (newer limits higher) | 125 → 1,000 MB/s | Provision IOPS & throughput independently. Default choice |
@@ -103,18 +105,25 @@ EFS gotchas: **Bursting** throughput mode is tied to size, so small filesystems 
 - **Security:** SSE-KMS with Bucket Keys, data perimeter policies, Macie on raw.
 - **DR:** CRR with RTC for critical curated tables to another region/account. Raw data can often be rebuilt from source, so make a conscious RPO decision per zone.
 - **Ops:** S3 Inventory + Athena for audits; CloudTrail data events on sensitive prefixes only (cost).
+
 </details>
 
 <details><summary><b>Q2. A batch job gets 503 Slow Down writing to S3.</b></summary>
+
 It's exceeding per-prefix request rates before S3 has re-partitioned. Fixes: spread writes across more prefixes (e.g. `/date/hour/shard-00..63/`), use exponential backoff with jitter (SDKs do this, so check the retry config), batch small objects into bigger files, and ramp up gradually. If it's KMS throttling (`ThrottlingException` from KMS), enable Bucket Keys.
+
 </details>
 
 <details><summary><b>Q3. Your DR test restored the DB from EBS snapshots, but the app was 10x slower for an hour. Why?</b></summary>
+
 Lazy loading from S3: blocks are fetched on first access. Fix with Fast Snapshot Restore on the DR AZ's critical volumes, a pre-warm script, or use a replicated database (Aurora Global, read replica) instead of snapshots for low-RTO tiers. This is why RTO must be measured in drills, not estimated.
+
 </details>
 
 <details><summary><b>Q4. How would you make an S3 bucket the source of truth for an append-only event log with multiple writers?</b></summary>
+
 Use conditional writes. Each writer creates `log/<seq>.json` with `If-None-Match: *`, and a writer that loses the race gets a `412 Precondition Failed` and retries with the next sequence. A manifest pointer updated with `If-Match: <etag>` gives compare-and-swap. This is the core idea behind table formats' commit protocols. Mention the trade-offs: one round trip per commit, and contention at high write concurrency (use partitioned logs).
+
 </details>
 
 ---

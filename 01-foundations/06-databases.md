@@ -71,6 +71,7 @@ Table ──hash(partition key)──► partition 1 … partition N
 - **On-demand** vs **provisioned (+ auto scaling)**: on-demand scales instantly up to double the previous peak; beyond that it ramps. Provisioned is cheaper at steady load. You can now set max throughput on on-demand tables (cost guard) and **warm throughput** (pre-warm before a launch).
 
 ### Hot partition / hot key fixes
+
 | Cause | Fix |
 |---|---|
 | Low-cardinality PK (e.g. `status=ACTIVE`) | Redesign the key; write sharding (`ACTIVE#0..9`) |
@@ -126,19 +127,27 @@ ElastiCache cluster mode: 16,384 hash slots across shards; Multi-AZ with automat
 ## 6. Senior interview questions — model answers
 
 <details><summary><b>Q1. DynamoDB vs Aurora for a new order service at 50k writes/sec peak?</b></summary>
+
 At 50k WPS, DynamoDB scales horizontally with no connection management, and the access patterns (get order, list orders by customer, by status) map well to PK/SK + a GSI. Aurora's single writer would need a very big instance and careful tuning; sharding Aurora brings operational pain. Choose DynamoDB, use Streams → analytics store (Redshift/S3 via zero-ETL) for ad-hoc queries, and transactions for order + inventory. If strong cross-entity SQL semantics are core (complex reporting in the same store), consider Aurora DSQL or a CQRS split.
+
 </details>
 
 <details><summary><b>Q2. Aurora Global DB: walk me through unplanned region failover.</b></summary>
+
 1) Detect (canaries + replication lag + ARC readiness). 2) Decide (humans, or automation with guardrails). 3) **Failover** (`failover-global-cluster` with `--allow-data-loss`), which promotes the secondary. RPO = replication lag at failure (usually < 1s, report it). 4) Shift app traffic (ARC routing control / Route 53). The app reconnects via the global writer endpoint. 5) After recovery, the old primary rejoins as secondary (it had divergent writes; Aurora takes a snapshot of the old primary for recovering lost writes). Practise it quarterly.
+
 </details>
 
 <details><summary><b>Q3. Why is "eventually consistent read" cheaper in DynamoDB?</b></summary>
+
 It can be served by any of the 3 replicas (not just the leader) and costs half an RCU. It may miss writes from the last ~second. Strongly consistent reads go to the leader, cost 1 RCU per 4 KB, and aren't supported on GSIs.
+
 </details>
 
 <details><summary><b>Q4. How do you do a zero-downtime major version upgrade of PostgreSQL on RDS?</b></summary>
+
 RDS Blue/Green Deployments: create green (new major version, logical replication from blue), test against green, then switchover (guardrails check replication lag, blocks writes briefly, renames endpoints). Downtime is typically under a minute. Pre-check: extension compatibility, `pg_upgrade` checks, DDL during replication (logical replication doesn't carry DDL), sequences, and large objects.
+
 </details>
 
 ---

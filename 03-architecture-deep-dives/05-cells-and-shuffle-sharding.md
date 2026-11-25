@@ -72,6 +72,7 @@ Too few cells → big blast radius. Too many → operational overhead (more depl
 ---
 
 ## 3. Related isolation patterns
+
 | Pattern | Idea |
 |---|---|
 | **Bulkheads** | Separate thread/connection pools per dependency, so one slow dependency can't exhaust all threads |
@@ -84,5 +85,7 @@ Too few cells → big blast radius. Too many → operational overhead (more depl
 ## 4. Interview drill
 
 <details><summary><b>Q: "Redesign our multi-tenant SaaS: one tenant's huge export job took down everyone."</b></summary>
+
 Short term: per-tenant rate limits and concurrency caps for heavy APIs; move exports to an async job queue with per-tenant fairness; bulkhead export workers from the interactive path. Medium term: shuffle-shard tenants over worker pools, so a poison tenant only affects a small set of others, with client-side retry across their shard. Long term: cell-based architecture (cell = account), router by tenant ID, largest tenants in dedicated cells, deploy cell-by-cell. Explain the blast-radius maths for each step.
+
 </details>

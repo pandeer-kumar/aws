@@ -24,6 +24,7 @@ Cross-region replication:
          → remote region EVCache (reader may re-read the value locally to fetch the payload)
 ```
 Why each design choice:
+
 | Choice | Reason |
 |---|---|
 | Full copy per AZ | AZ failure loses no cache hit rate; reads stay in-AZ (lower latency, no cross-AZ cost) |
@@ -70,6 +71,7 @@ Benefits: one place for best practices, transparent **store migration** (shadow 
 
 ### 2.3 Distributed Counter abstraction (2024)
 Different counters need different trade-offs, so Netflix offers **modes**:
+
 | Mode | Mechanism | Accuracy | Latency | Use |
 |---|---|---|---|---|
 | **Best-effort regional** | EVCache increments (atomic on one cache node, chosen by consistent hashing) | Approximate; lost on cache failure; no global view | lowest | A/B test impressions, rate-ish metrics |
@@ -116,11 +118,15 @@ AWS-native equivalent: producers → **Kinesis Data Streams** or **MSK** → **M
 ## 5. Interview drill
 
 <details><summary><b>Q: "Design 'Continue Watching' (bookmarks) for 300M members across 4 regions."</b></summary>
+
 Write path: the device sends position heartbeats every N seconds → gateway → bookmark service → KV store (`id=member#profile`, `key=title`, value=position+timestamp) with idempotency token, LOCAL_QUORUM in the home region, async multi-region replication (Cassandra / DynamoDB global tables), last-writer-wins by client timestamp (positions are monotonic within a session). Cache recent reads in an EVCache-style cache replicated cross-region. Read path: home row from cache → KV. Heartbeats are high-volume: batch them and shed them first under load (priority BEST_EFFORT; the final "stop" event is DEGRADED/CRITICAL). Analytics: also emit to the event pipeline (Keystone/Kinesis) → S3 for recommendations.
+
 </details>
 
 <details><summary><b>Q: "Exact vs approximate counters: how do you decide?"</b></summary>
+
 Ask what the count is used for. Billing, quotas and legal reporting need exact counts, durable and idempotent (event log + rollup, accept seconds of delay). Dashboards, popularity rankings and A/B impression counts tolerate approximations (in-memory/cache counters, HyperLogLog for uniques), which are far cheaper and lower-latency. Say the cost/latency/accuracy triangle out loud.
+
 </details>
 
 ## Further reading (Netflix Tech Blog)

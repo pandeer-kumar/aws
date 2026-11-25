@@ -47,6 +47,7 @@ On AWS without Spinnaker: CodeDeploy canary + CloudWatch alarms (simplest), **Ar
 ## Part B: Chaos engineering
 
 ### B1. Evolution
+
 | Tool | Year | What it does |
 |---|---|---|
 | **Chaos Monkey** | 2011 | Randomly terminates instances in production during business hours, so engineers build for instance loss |
@@ -109,11 +110,15 @@ AWS today: **GuardDuty** `UnauthorizedAccess:IAMUser/InstanceCredentialExfiltrat
 ## Interview drill
 
 <details><summary><b>Q: "Design guardrails so 2,000 engineers can deploy hundreds of times per day."</b></summary>
+
 A paved-road pipeline (template) that's the default for every new service: build → test → bake an immutable image → deploy to canary with automated canary analysis vs a fresh baseline → staged regional rollout (one region first) → red/black so rollback is instant → automatic rollback on SLO burn. Platform-owned libraries for IPC, retries, metrics and tracing so every service exposes the same signals. Self-service, no tickets. Guardrails, not gates: policy-as-code blocks dangerous changes (public S3, wildcard IAM), but humans don't approve routine deploys. Measure DORA metrics.
+
 </details>
 
 <details><summary><b>Q: "Our CTO wants chaos engineering. Where do you start?"</b></summary>
+
 Prerequisites first: good observability with a business KPI, tested rollback, on-call runbooks. Then (1) game days in staging: kill instances, fail an AZ with FIS, inject dependency latency. (2) Fix what breaks. (3) Small production experiments with FIS stop conditions on SLO alarms, during business hours. (4) Automate recurring experiments (instance termination, AZ evacuation via zonal shift). (5) Region evacuation drills for tier-0. Report findings as reliability work items with owners.
+
 </details>
 
 ## Further reading

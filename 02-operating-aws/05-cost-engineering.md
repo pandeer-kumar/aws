@@ -34,6 +34,7 @@
 ---
 
 ## 3. Architectural cost levers
+
 | Lever | Typical saving |
 |---|---|
 | Graviton | 20–40% price/perf |
@@ -57,9 +58,13 @@ Netflix has written about **cloud efficiency** as an engineering discipline: the
 ## 5. Senior interview questions — model answers
 
 <details><summary><b>Q1. How do you give 50 teams cost accountability?</b></summary>
+
 Account-per-team-per-env (cleanest attribution) + mandatory tags enforced by Tag Policies/SCP + Cost Categories for shared costs (split network/shared services by usage or a fixed key). Monthly showback (chargeback if finance wants it) with unit-cost metrics: cost per 1k requests, per customer, per stream hour. Anomaly alerts routed to team channels. Budgets per account. Make efficiency a quarterly engineering KPI alongside reliability.
+
 </details>
 
 <details><summary><b>Q2. Five AWS costs that surprise teams?</b></summary>
+
 1) NAT Gateway data processing. 2) Cross-AZ data transfer (replication, chatty microservices, cross-zone LB). 3) CloudWatch Logs ingestion + infinite retention. 4) Public IPv4 addresses ($0.005/hr each since 2024). 5) S3 request costs and lifecycle transition costs on billions of small objects. Bonus: KMS request costs, Config recorder in high-churn accounts, EBS snapshots of deleted volumes, data transfer to the internet without CloudFront, idle provisioned DynamoDB/Kinesis.
+
 </details>

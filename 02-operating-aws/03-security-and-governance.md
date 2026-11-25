@@ -96,6 +96,7 @@ Decrypt:
 ---
 
 ## 5. Shared responsibility nuances
+
 | | EC2 | ECS on Fargate | Lambda | RDS | S3 |
 |---|---|---|---|---|---|
 | OS patching | **You** | AWS | AWS | AWS (you schedule maintenance) | — |
@@ -116,9 +117,13 @@ Decrypt:
 ## 7. Senior interview questions — model answers
 
 <details><summary><b>Q1. A developer needs prod read access during an incident. How?</b></summary>
+
 Just-in-time elevated access: an Identity Center permission set (e.g. `ProdReadOnly`) granted temporarily via **Temporary elevated access management (TEAM)** or an approval workflow, time-boxed, with session tags and CloudTrail `SourceIdentity`. Auto-expire. No shared accounts. Review afterwards.
+
 </details>
 
 <details><summary><b>Q2. How do you prove to an auditor that all S3 buckets are encrypted and private?</b></summary>
+
 Preventive: account-level Block Public Access via SCP (deny `s3:PutAccountPublicAccessBlock` changes), default encryption, RCPs restricting principals to the org. Detective: Config rules (`s3-bucket-public-read-prohibited`, `s3-bucket-server-side-encryption-enabled`) in an org conformance pack with an aggregator, plus Security Hub FSBP controls. Evidence: **Audit Manager** assessment reports. Show the control is enforced *and* continuously evaluated.
+
 </details>

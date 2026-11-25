@@ -55,6 +55,7 @@
 - **Zuul** (edge gateway) in each region can **proxy requests to another region**. This is the key lever. To move traffic you don't need to wait for DNS TTLs; Zuul forwards a configurable percentage of traffic cross-region. DNS is updated last, to make the move permanent for clients.
 
 ### 3.2 Data replication
+
 | Data | Store | Cross-region mechanism | Consistency |
 |---|---|---|---|
 | Member/user state, viewing history, bookmarks | **Cassandra** | Native multi-datacenter async replication; writes at `LOCAL_QUORUM` | Eventual across regions; strong-ish within region |
@@ -157,15 +158,21 @@ Shifting 33–50% more traffic into a region means its **caches don't hold the e
 ## 8. Interview drill
 
 <details><summary><b>Q: "Why not active-passive? It's cheaper."</b></summary>
+
 Passive regions rot: config drift, untested capacity, cold caches, and the failover itself is a rare, scary event. Active-active proves every day that each region can serve traffic. The extra cost is the headroom, which is 1/(N-1) of capacity. For a business where minutes of downtime are front-page news and lost revenue, it's worth it. For lower tiers, warm standby is fine. Say that explicitly: **match the strategy to the tier.**
+
 </details>
 
 <details><summary><b>Q: "A region is degraded, not down (10% errors). Do you evacuate?"</b></summary>
+
 If the business metric (SPS) shows real customer impact and the cause isn't quickly fixable, yes. Evacuation is a well-practised, low-risk operation at Netflix, so the bar to use it is low. That's the point of practising. The danger is waiting for certainty during a grey failure. Pull traffic early, debug later.
+
 </details>
 
 <details><summary><b>Q: "What would break first if you shifted 100% of traffic to one region?"</b></summary>
+
 Stateful tiers: cache hit rate (cold keys), database read/write capacity, connection limits, and per-account/region AWS service quotas (ELB, Lambda concurrency, DynamoDB table limits). Then third-party dependencies with regional rate limits. Validate quotas in advance (Service Quotas + ARC readiness checks).
+
 </details>
 
 ---

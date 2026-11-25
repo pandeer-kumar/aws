@@ -10,6 +10,7 @@ You chose the Professional track. Realistic path for a software engineer new to 
 ---
 
 ## SAP-C02 domains → chapters
+
 | Domain (approx. weight) | Chapters |
 |---|---|
 | **1. Design solutions for organizational complexity** (~26%) | IAM §7, Security & governance (landing zone, SCP/RCP), VPC §3 (TGW, Cloud WAN, hybrid DNS), Cost §4 |
@@ -20,6 +21,7 @@ You chose the Professional track. Realistic path for a software engineer new to 
 **SAP-C02 tips:** questions are long, multi-paragraph scenarios. Look for the *constraint words*: "least operational overhead", "most cost-effective", "minimize downtime", "without changing the application". Eliminate answers that violate the constraint first.
 
 ## DOP-C02 domains → chapters
+
 | Domain | Chapters |
 |---|---|
 | **1. SDLC automation** | IaC & deployments (CodePipeline/CodeBuild/CodeDeploy strategies, canary, artifact signing) |

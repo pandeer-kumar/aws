@@ -23,6 +23,7 @@ Users ─► CloudFront (static, cached product page; WAF rate/bot rules)
                      success → CONFIRMED · failure/timeout → compensate: stock + 1
 ```
 ### Hard parts
+
 | Problem | Solution |
 |---|---|
 | Hot key: one item × 2M requests | Write sharding of stock across N items; pick a random shard, fall back to others when one is at 0 |
@@ -37,6 +38,7 @@ Users ─► CloudFront (static, cached product page; WAF rate/bot rules)
 ## B. Multi-tenant B2B SaaS (5,000 tenants, a few very large)
 
 ### Design choices: tenancy models
+
 | Model | Isolation | Cost | Ops |
 |---|---|---|---|
 | **Silo** (account/stack per tenant) | Strongest | Highest | Many deployments |

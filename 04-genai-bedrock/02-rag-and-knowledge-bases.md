@@ -106,4 +106,5 @@ Common root causes: table content lost in PDF parsing; acronyms not matching (ne
 - **Scale/latency:** 2k QPS → CRIS profile + quota increases + token-bucket limits per team; budget: retrieval 300ms, rerank 150ms, TTFT under 1s, streaming.
 - **Quality & safety:** golden eval sets per domain in CI; contextual grounding guardrail; citations mandatory; feedback thumbs → eval set growth.
 - **Ops:** dashboards for retrieval latency, empty-result rate, guardrail intervention rate, cost per query.
+
 </details>

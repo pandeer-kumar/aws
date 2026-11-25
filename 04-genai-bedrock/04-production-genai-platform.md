@@ -28,6 +28,7 @@ Built on: API Gateway / ALB + ECS/Lambda, or LiteLLM-style proxies on EKS, or Ag
 - Unit metrics: cost per conversation, per resolved ticket, per document processed.
 
 ## 3. Resilience for GenAI
+
 | Risk | Mitigation |
 |---|---|
 | Throttling / capacity in a region | CRIS (geo/global), multi-region gateway, fallback model, queue non-interactive work, batch |
@@ -46,5 +47,7 @@ Built on: API Gateway / ALB + ECS/Lambda, or LiteLLM-style proxies on EKS, or Ag
 ## 5. Interview question — model answer
 
 <details><summary><b>Design LLM access for 10 teams with chargeback, safety and no single team starving others.</b></summary>
+
 Central AI gateway per region (ECS Fargate behind ALB with JWT/IAM auth), token-bucket quotas per team in DynamoDB/ElastiCache sized from the account's Bedrock TPM (reserve headroom for priority apps). Model allow-lists by data class. Default prompt caching and max_tokens limits. Guardrails baseline applied centrally, with stricter team-specific ones on top. Application inference profiles per team for native cost tags, plus gateway usage logs to S3/Athena for unit metrics. Failover: CRIS profiles + secondary region gateway + fallback model qualified by evals. Observability: per-team latency/TTFT/throttle/guardrail-intervention dashboards. A self-service onboarding pipeline creates the team's profile, quota and IAM role.
+
 </details>

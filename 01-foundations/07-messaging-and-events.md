@@ -110,15 +110,21 @@ After a downstream outage, 50M messages sit in SQS. If you scale consumers to ma
 ## 8. Senior interview questions — model answers
 
 <details><summary><b>Q1. Exactly-once delivery: possible?</b></summary>
+
 Not end to end over an unreliable network. You get **at-least-once delivery + idempotent processing = effectively-once results**. SQS FIFO deduplicates within 5 minutes; Kafka has idempotent producers and transactions (exactly-once within Kafka). Any external side effect (charging a card, sending an email) still needs an idempotency key at the boundary.
+
 </details>
 
 <details><summary><b>Q2. Transactional outbox: why and how on AWS?</b></summary>
+
 Problem: writing to the DB and publishing an event are two systems, so a crash between them loses or duplicates the event. Outbox: write the business row *and* an outbox row in one DB transaction. A relay publishes the outbox rows. On AWS: DynamoDB `TransactWriteItems` (order + outbox item) with **DynamoDB Streams → Lambda/EventBridge Pipes** as the relay, or Aurora + Debezium/MSK Connect CDC. Consumers stay idempotent because the relay is at-least-once.
+
 </details>
 
 <details><summary><b>Q3. Kinesis vs MSK?</b></summary>
+
 Kinesis: serverless-ish, AWS-native IAM, shard model, simpler ops, 365-day retention max, fixed per-shard limits. MSK (or MSK Serverless / Express brokers): Kafka API compatibility, ecosystem (Connect, Streams, Schema Registry), finer tuning, higher per-partition throughput. You manage partitions/brokers (less so with Serverless/Express) and **cross-AZ replication traffic cost** (use rack-aware consumers). Choose by ecosystem lock-in and team skills. Netflix's Keystone runs on Kafka (it predates MSK).
+
 </details>
 
 ---

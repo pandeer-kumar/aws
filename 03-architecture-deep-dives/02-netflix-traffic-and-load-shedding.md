@@ -116,11 +116,15 @@ Observability: per-priority availability SLOs (CRITICAL 99.99, BEST_EFFORT 99).
 ## 7. Interview drill
 
 <details><summary><b>Q: "Why not just autoscale faster instead of shedding?"</b></summary>
+
 Scaling takes minutes (launch + warm-up). Spikes and failovers happen in seconds. Scaling also depends on the control plane, which may be impaired during the very event causing the surge. Shedding is instant and data-plane-only. You need both: shedding for the seconds-to-minutes gap, autoscaling for sustained load. Design them so shedding doesn't hide the scaling signal.
+
 </details>
 
 <details><summary><b>Q: "How do you decide priorities?"</b></summary>
+
 Map each request type to user-visible impact. Ask: "If this fails, does a user notice right now?" Playback and checkout are critical; personalisation is degraded mode (show generic rows); telemetry and pre-fetch are best-effort/bulk. Make the priority explicit in the request (header) and owned by the product team, and test it via chaos.
+
 </details>
 
 ## Further reading

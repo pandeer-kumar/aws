@@ -20,6 +20,7 @@ Weeks 15+   07-certification ──────── SAP-C02 / DOP-C02
 ## 📚 Contents
 
 ### 01 · Foundations: how it works under the hood
+
 | # | Chapter | Key ideas |
 |---|---|---|
 | 01 | [Global infrastructure](01-foundations/01-global-infrastructure.md) | Regions/AZs, **control vs data plane**, **static stability**, cells, edge |
@@ -31,6 +32,7 @@ Weeks 15+   07-certification ──────── SAP-C02 / DOP-C02
 | 07 | [Messaging & events](01-foundations/07-messaging-and-events.md) | SQS semantics, idempotency, outbox, Kinesis/MSK, Step Functions, draining backlogs |
 
 ### 02 · Operating AWS: keeping it working
+
 | # | Chapter | Key ideas |
 |---|---|---|
 | 01 | [Observability](02-operating-aws/01-observability.md) | SLO burn-rate alarms, EMF, cardinality, CloudTrail/Config |
@@ -40,6 +42,7 @@ Weeks 15+   07-certification ──────── SAP-C02 / DOP-C02
 | 05 | [Cost engineering](02-operating-aws/05-cost-engineering.md) | CUR investigations, Savings Plans strategy, architectural cost levers |
 
 ### 03 · Architecture deep dives & case studies
+
 | # | Deep dive | Source |
 |---|---|---|
 | 01 | [Netflix: four-region active-active & region evacuation](03-architecture-deep-dives/01-netflix-multi-region-active-active.md) | Netflix Tech Blog, talks |
@@ -51,6 +54,7 @@ Weeks 15+   07-certification ──────── SAP-C02 / DOP-C02
 | 07 | [Reference architectures: flash sale, multi-tenant SaaS, video pipeline](03-architecture-deep-dives/07-reference-architectures.md) | Composite |
 
 ### 04 · GenAI on AWS (Bedrock & agents)
+
 | # | Chapter |
 |---|---|
 | 01 | [Bedrock internals: request path, quotas, CRIS, prompt caching, Guardrails](04-genai-bedrock/01-bedrock-internals.md) |

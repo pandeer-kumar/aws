@@ -158,28 +158,38 @@ IdP (Okta / Entra ID) ──SCIM+SAML──► IAM Identity Center (in the manag
 ## 9. Senior interview questions — model answers
 
 <details><summary><b>Q1. Can an SCP grant permissions?</b></summary>
+
 No. SCPs (and RCPs, boundaries, session policies) only set the maximum. Effective permissions are the **intersection** of the limiting policies and the **union** of granting policies (identity + resource). SCPs also don't apply to the management account or to service-linked roles. That is why you should run no workloads in the management account.
+
 </details>
 
 <details><summary><b>Q2. Design: let 50 dev teams create their own IAM roles for Lambdas without becoming admins.</b></summary>
+
 Permission boundaries. The platform team creates a boundary policy (e.g. no IAM, no Organizations, only resources tagged with the team). Dev roles get `iam:CreateRole` with a condition `iam:PermissionsBoundary == arn:…/team-boundary`. They also get denied `iam:DeleteRolePermissionsBoundary` and editing the boundary policy itself. Any role they create can never exceed the boundary. This prevents privilege escalation via `iam:PassRole` to a more powerful role. Also restrict `iam:PassRole` with `iam:PassedToService`.
+
 </details>
 
 <details><summary><b>Q3. How do you prevent data exfiltration from S3 even if creds leak?</b></summary>
+
 "Data perimeter." Three controls:
 1. **Identity perimeter:** RCP / bucket policy: deny unless `aws:PrincipalOrgID == o-xxxx` (allow AWS service principals via `aws:PrincipalIsAWSService`).
 2. **Network perimeter:** deny unless `aws:SourceVpce` is in your endpoints, or `aws:SourceIp` is in corporate ranges (with `aws:ViaAWSService` exceptions).
 3. **Resource perimeter:** VPC endpoint policy: allow only `aws:ResourceOrgID == o-xxxx`. This stops a compromised instance from copying data to an *attacker's* bucket.
 
 Plus GuardDuty S3 protection, Macie for data classification, and CloudTrail data events on sensitive buckets.
+
 </details>
 
 <details><summary><b>Q4. Leaked access key found on GitHub. Runbook?</b></summary>
+
 1) Deactivate (don't delete yet, keep it for forensics). 2) If it's a role session, revoke active sessions: the console adds a deny policy with `aws:TokenIssueTime` before now. 3) CloudTrail Lake / Athena: everything that key did (look for `CreateUser`, `CreateAccessKey`, `AttachRolePolicy`, `RunInstances` in odd regions, which usually means crypto-mining). 4) Check persistence: new users, keys, roles, Lambda functions, trust-policy edits. 5) Rotate, then delete. 6) Root cause plus prevention: secret scanning in CI, move to OIDC/roles, an SCP denying `iam:CreateAccessKey`. AWS also auto-applies the `AWSCompromisedKeyQuarantineV3` policy when it detects public exposure.
+
 </details>
 
 <details><summary><b>Q5. Why does my Lambda get AccessDenied on an SSE-KMS bucket even though the bucket policy allows it?</b></summary>
+
 KMS. The Lambda role needs `kms:Decrypt` (and `kms:GenerateDataKey` for writes) on the key. The **key policy** must allow it too, directly or by delegating to IAM. If the key is in another account, both sides must allow. Also check `kms:ViaService` conditions and whether S3 Bucket Keys are enabled (that changes the encryption context to the bucket ARN).
+
 </details>
 
 ---

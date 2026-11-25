@@ -48,6 +48,7 @@ Security groups are **stateful**, so the Nitro card tracks every flow. Each inst
 | **Elastic IP** | Static public IPv4. Since Feb 2024 **every** public IPv4 costs about $0.005/hr. Audit them. |
 
 ### Security Group vs NACL
+
 | | Security Group | Network ACL |
 |---|---|---|
 | Level | ENI | Subnet |
@@ -135,6 +136,7 @@ Deep dive on load-balancer behaviour: [04-compute-and-load-balancing.md](./04-co
 ---
 
 ## 7. Data transfer costs (the networking line nobody reads until it's huge)
+
 | Path | Typical price |
 |---|---|
 | Inbound from internet | Free |
@@ -152,19 +154,27 @@ Deep dive on load-balancer behaviour: [04-compute-and-load-balancing.md](./04-co
 ## 8. Senior interview questions — model answers
 
 <details><summary><b>Q1. NAT Gateway costs $40k/month. Fix it.</b></summary>
+
 1) **VPC Flow Logs** (or NAT GW CloudWatch `BytesOutToDestination`) and Athena to find the top destinations. 2) Usually it's S3/DynamoDB/ECR/CloudWatch Logs traffic going via NAT. Add a **gateway endpoint** for S3/DynamoDB (free) and interface endpoints for ECR (`api`, `dkr`), Logs and STS. Interface endpoints at $0.01/GB vs NAT's $0.045/GB still win at volume. 3) Check cross-AZ NAT usage (subnets routing to a NAT in another AZ pay cross-AZ *and* NAT). 4) Move container image pulls to a pull-through cache in ECR. 5) For big third-party egress, consider IPv6 + egress-only IGW (no processing fee).
+
 </details>
 
 <details><summary><b>Q2. Connect two VPCs with overlapping 10.0.0.0/16.</b></summary>
+
 Options: (a) **PrivateLink**. Expose only the needed services via NLB + endpoint service; overlapping CIDRs don't matter because the consumer gets ENIs in its own space. (b) **VPC Lattice** for service-level connectivity. (c) **Private NAT Gateway**: add a secondary non-overlapping CIDR (e.g. 100.64.0.0/16) to each VPC, put a private NAT GW there, and route via TGW. (d) Re-IP long-term with IPAM. A senior answer chooses by the shape of the traffic: a few services → PrivateLink/Lattice; broad network access → private NAT, then a re-IP plan.
+
 </details>
 
 <details><summary><b>Q3. Intermittent connection timeouts from Lambda in a VPC to RDS at peak.</b></summary>
+
 Suspects, in order: (1) **DB connection exhaustion**. Thousands of concurrent Lambdas each open connections. Fix with RDS Proxy (pooling and multiplexing). (2) Security-group or subnet IP exhaustion (Hyperplane ENIs are shared per subnet+SG combo since 2019, so this is less common). (3) Too few NAT GW ports per destination (if calling external APIs). (4) DNS throttling on the resolver. Evidence: RDS `DatabaseConnections`, Proxy `ClientConnections` vs `DatabaseConnectionsCurrentlyBorrowed`, NAT `ErrorPortAllocation`.
+
 </details>
 
 <details><summary><b>Q4. Why use Network Firewall in a separate inspection VPC with appliance mode?</b></summary>
+
 Centralized, consistent policy for east-west and egress traffic with a single management point. Appliance mode keeps both directions of a flow on the same AZ's firewall endpoint (TGW otherwise picks the AZ per direction, which breaks stateful inspection). The trade-off is extra hops, TGW processing cost and a shared blast radius, so you scale it per region and monitor its health closely.
+
 </details>
 
 ---

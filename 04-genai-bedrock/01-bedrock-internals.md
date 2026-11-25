@@ -32,6 +32,7 @@ App (SDK, SigV4 or Bedrock API key) ──HTTPS──► bedrock-runtime.<region
 ```
 
 ### APIs
+
 | API | Use |
 |---|---|
 | **Converse / ConverseStream** | Unified chat API across models: messages, system prompt, **tool use** (function calling), images/documents, guardrails, prompt caching. **Default choice** |
@@ -126,13 +127,19 @@ Policies: **content filters** (hate, insults, sexual, violence, misconduct, **pr
 ## 7. Senior interview questions — model answers
 
 <details><summary><b>Q1. Your chatbot's p95 latency is 9s. Break it down and fix it.</b></summary>
+
 Measure: time-to-first-token (TTFT) vs total generation time vs retrieval time vs guardrail time vs your app. Fixes: **stream** (ConverseStream) so users see tokens at TTFT; prompt caching (cuts TTFT on long prefixes); a smaller/faster model for simple turns (router); fewer retrieved chunks and a reranker instead of stuffing 20 chunks; parallelize retrieval + guardrail input check; latency-optimized inference options where available; reduce output length (concise instructions, `max_tokens`); keep the client close to the region or use CRIS for capacity. Report TTFT and tokens/sec as SLIs.
+
 </details>
 
 <details><summary><b>Q2. Estimate monthly cost for an internal assistant: 5k users, 20 queries/day, 6k input / 500 output tokens per query.</b></summary>
+
 Volume: 5,000 × 20 × 22 workdays = 2.2M queries/month. Tokens: 13.2B input, 1.1B output. With a mid-tier model at about $3/M input and $15/M output (illustrative) → $39.6k + $16.5k ≈ **$56k/month**. If 4k of the 6k input tokens are a stable system prompt + tools, cached at ~90% off → input cost drops by ~60%, to about $16k → total ≈ **$33k**. Routing 50% of easy queries to a model ~5× cheaper → about **$20k**. Lesson: caching, routing and output length dominate GenAI cost. Always do this arithmetic out loud.
+
 </details>
 
 <details><summary><b>Q3. How do you prevent a team from sending EU customer data to US regions via Bedrock?</b></summary>
+
 SCP on the EU workload OU: deny `bedrock:InvokeModel*`/`Converse*` unless the resource is an `eu.` inference profile or an EU-region foundation model; deny `global.*` profiles. Keep Knowledge Bases, logs and vector stores in EU regions. Enforce VPC endpoint usage. Detect with Config/CloudTrail queries for non-EU profile ARNs.
+
 </details>

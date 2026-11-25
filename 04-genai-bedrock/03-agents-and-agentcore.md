@@ -124,17 +124,25 @@ API Gateway / ALB ──► AgentCore Runtime (Strands agent; per-session microV
 ## 5. Senior interview questions — model answers
 
 <details><summary><b>Q1. Why per-session microVM isolation instead of a shared container fleet?</b></summary>
+
 Agents execute untrusted, model-directed actions: running code, writing files, holding user tokens in memory. On a shared container, a compromised or confused session could read another user's files, environment or tokens (cross-session leakage), and state could persist between users. Per-session microVMs (Firecracker-style) give hardware-virtualization boundaries, a clean environment per session and sanitization on teardown. The trade-off is a per-session start cost and resource overhead, which the managed runtime absorbs.
+
 </details>
 
 <details><summary><b>Q2. An agent needs to read a user's Google Drive and create Jira tickets. How do credentials work?</b></summary>
+
 3-legged OAuth via AgentCore Identity: the first time, the user is redirected to consent; the refresh token is stored in the token vault keyed to (agent workload identity, user). At tool-call time Gateway/Identity exchanges it for a short-lived, scoped access token and attaches it to the outbound call. The agent code never handles long-lived secrets. Scopes are minimal (read-only Drive, create-issue Jira). Revocation is via the IdP/provider, and the audit trail shows which user the agent acted for.
+
 </details>
 
 <details><summary><b>Q3. How do you ship a new prompt/model version for an agent safely?</b></summary>
+
 Treat it like code: version prompts in Git, run the offline eval suite (golden conversations, tool-accuracy tests, safety red-team set) in CI with pass thresholds, deploy to a new Runtime endpoint version, canary a small % of sessions, compare online evaluation scores + cost/latency + escalation rate against the baseline, then promote or roll back. Pin model IDs, never "latest".
+
 </details>
 
 <details><summary><b>Q4. Cost blew up: one agent session used 2M tokens.</b></summary>
+
 Likely a loop or context bloat (tool returning huge payloads that get appended each turn). Fixes: per-session token/time budgets enforced in the loop, truncate/summarize tool outputs, paginate tool results, prompt caching for the stable prefix, alarms on tokens per session (CloudWatch metrics from observability spans), and a kill switch.
+
 </details>

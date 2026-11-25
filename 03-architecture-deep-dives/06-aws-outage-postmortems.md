@@ -101,7 +101,9 @@ DynamoDB DNS management automation
 ## 7. Interview drill
 
 <details><summary><b>Q: "What did you change in your architecture after the Oct 2025 outage?"</b></summary>
+
 (Model answer for a senior.) "We audited our hard dependencies on us-east-1. We found our CI/CD, our secrets fetch at container start, and an IdP integration all had only-us-east-1 paths. We (1) made workloads cache secrets and config so running tasks survive a dependency outage, (2) moved tier-0 to an active/standby second region with ARC routing controls so failover needs no Route 53 API changes, (3) added velocity limits to our own automation that removes capacity on failed health checks, and (4) added a game day simulating 'DynamoDB endpoint unresolvable' with FIS plus DNS fault injection. We measured RTO and found the next bottleneck: cold start of the standby's connection pools."
+
 </details>
 
 ## Sources

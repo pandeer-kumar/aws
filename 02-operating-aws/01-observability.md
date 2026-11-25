@@ -90,9 +90,13 @@ Brendan Gregg's (ex-Netflix) *Linux Performance Analysis in 60,000 Milliseconds*
 ## 7. Senior interview questions — model answers
 
 <details><summary><b>Q1. How do you avoid alarm fatigue across 50 teams?</b></summary>
+
 Page only on SLO burn and a short list of imminent-harm causes. Every page must be actionable and have a runbook link. Use composite alarms to suppress noise (dependency down → don't page all 20 dependents). Review alert quality monthly: pages per on-call shift, % actionable. Delete alarms nobody acted on. A platform team provides standard alarm modules in IaC so teams start with sensible defaults.
+
 </details>
 
 <details><summary><b>Q2. Prove who deleted a production security group last Tuesday.</b></summary>
+
 CloudTrail: `eventName=DeleteSecurityGroup` with `requestParameters.groupId`, across the org trail (CloudTrail Lake SQL or Athena). Read `userIdentity` (assumed-role ARN + session name = the Identity Center user), `sourceIPAddress`, `userAgent`. AWS Config shows the resource timeline and its relationships before deletion. If the session name is generic (e.g. a CI role), trace back via `sts:AssumeRole` events to the source identity. Enforce `sts:SourceIdentity` for this reason.
+
 </details>

@@ -61,6 +61,7 @@ Bad DR plan: "When AZ-a fails, the ASG will launch new instances in AZ-b and AZ-
 Better: **pre-provision** capacity in all AZs (static stability) and have health checks shift traffic away. That uses only the ELB/Route 53 data planes.
 
 ### Global services and where their control planes live
+
 | Service | Data plane | Control plane |
 |---|---|---|
 | IAM | Globally replicated (authN/authZ happens in every region) | `us-east-1` |
@@ -135,26 +136,31 @@ AWS splits big services into **cells**: complete, independent copies of the serv
 <details><summary><b>Q1. Your app runs in 2 AZs behind an ALB. Is it highly available?</b></summary>
 
 "Partially. Two problems. (1) **Capacity:** if each AZ runs at more than 50%, losing one overloads the other and causes a cascading failure. (2) **Dependencies:** what about the DB, NAT gateway and caches? Often one of them is single-AZ. I'd move to 3 AZs and keep each below about 66% at peak. I'd add a NAT gateway per AZ and run RDS Multi-AZ or Aurora with readers in other AZs. I'd use **zonal autoshift** or ARC **zonal shift** so I can pull an AZ out of the load balancer during grey failures. I'd also confirm cross-zone load balancing settings match my capacity plan."
+
 </details>
 
 <details><summary><b>Q2. What is a grey failure and how do you detect one?</b></summary>
 
 "A partial failure where health checks still pass but customers see errors or latency. Examples: packet loss on one rack, a slow EBS volume, one AZ's DNS resolver degraded. Detection: per-AZ metrics (ALB `HTTPCode_Target_5XX_Count` and `TargetResponseTime` **by AZ**), outlier detection comparing AZs, deep health checks (but not *too* deep, see Q3), and CloudWatch Internet Monitor / canaries from outside. Mitigation: zonal shift away from the bad AZ. You can do this because you are statically stable with N-1 capacity."
+
 </details>
 
 <details><summary><b>Q3. Shallow vs deep health checks?</b></summary>
 
 "A shallow check (`/ping` returns 200) proves the process is alive. A deep check also tests dependencies (DB, cache). Deep checks catch more, but they're dangerous. If the shared DB blips, *every* host fails its health check at once, and the LB has nothing healthy left. Pattern: shallow checks for the LB. Deep checks feed alarms and dashboards, not routing. ALB and NLB also **fail open**: if all targets are unhealthy, they route to all of them, which is a deliberate safety net. Route 53 health checks behave similarly when every record in a set is unhealthy."
+
 </details>
 
 <details><summary><b>Q4. Explain how you'd fail over a region during a us-east-1 control-plane outage.</b></summary>
 
 "Pre-decided, pre-provisioned, data-plane only. Standby region already scaled (or warm with a scaling headroom plan that doesn't rely on the failed region). Data already replicated (Aurora Global Database, DynamoDB global tables, S3 CRR). Traffic shift with ARC routing controls or Route 53 health-check-driven failover records, which are data plane. No `ChangeResourceRecordSets` needed in the moment. Practice it with game days. Netflix evacuates regions routinely, which is why it works when they need it."
+
 </details>
 
 <details><summary><b>Q5. A partner says 'deploy in us-east-1a to be in our AZ'. What's wrong?</b></summary>
 
 "AZ names are mapped per account. Their `us-east-1a` may be my `us-east-1c`. Compare **AZ IDs** (`use1-az4`) from `aws ec2 describe-availability-zones`."
+
 </details>
 
 ---
