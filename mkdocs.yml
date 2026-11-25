@@ -1,0 +1,91 @@
+site_name: AWS Deep-Dive Study Guide
+site_description: How AWS works, why it works, and how to keep it working. Senior-interview focused, with Netflix and AWS outage case studies and Bedrock/AgentCore.
+site_url: https://pandeer-kumar.github.io/aws/
+repo_url: https://github.com/pandeer-kumar/aws
+repo_name: pandeer-kumar/aws
+edit_uri: ""
+docs_dir: site_src
+site_dir: site
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - navigation.tracking
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      accent: amber
+      toggle: {icon: material/weather-night, name: Switch to dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      accent: amber
+      toggle: {icon: material/weather-sunny, name: Switch to light mode}
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - def_list
+  - toc: {permalink: true}
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight: {anchor_linenums: true}
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist: {custom_checkbox: true}
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Foundations:
+      - Global infrastructure: 01-foundations/01-global-infrastructure.md
+      - IAM deep dive: 01-foundations/02-iam-deep-dive.md
+      - VPC & networking: 01-foundations/03-vpc-networking.md
+      - Compute & load balancing: 01-foundations/04-compute-and-load-balancing.md
+      - Storage: 01-foundations/05-storage.md
+      - Databases: 01-foundations/06-databases.md
+      - Messaging & events: 01-foundations/07-messaging-and-events.md
+  - Operating AWS:
+      - Observability: 02-operating-aws/01-observability.md
+      - IaC & deployments: 02-operating-aws/02-iac-and-deployments.md
+      - Security & governance: 02-operating-aws/03-security-and-governance.md
+      - Resilience & DR: 02-operating-aws/04-resilience-and-dr.md
+      - Cost engineering: 02-operating-aws/05-cost-engineering.md
+  - Deep dives:
+      - Netflix multi-region: 03-architecture-deep-dives/01-netflix-multi-region-active-active.md
+      - Netflix load shedding: 03-architecture-deep-dives/02-netflix-traffic-and-load-shedding.md
+      - Netflix data platform: 03-architecture-deep-dives/03-netflix-data-platform.md
+      - Netflix delivery, chaos & security: 03-architecture-deep-dives/04-netflix-delivery-chaos-and-security.md
+      - Cells & shuffle sharding: 03-architecture-deep-dives/05-cells-and-shuffle-sharding.md
+      - AWS outage post-mortems: 03-architecture-deep-dives/06-aws-outage-postmortems.md
+      - Reference architectures: 03-architecture-deep-dives/07-reference-architectures.md
+  - GenAI & Bedrock:
+      - Bedrock internals: 04-genai-bedrock/01-bedrock-internals.md
+      - RAG & Knowledge Bases: 04-genai-bedrock/02-rag-and-knowledge-bases.md
+      - Agents & AgentCore: 04-genai-bedrock/03-agents-and-agentcore.md
+      - Production GenAI platform: 04-genai-bedrock/04-production-genai-platform.md
+  - Interview prep:
+      - Senior question bank: 05-interview-prep/01-senior-question-bank.md
+      - Troubleshooting drills: 05-interview-prep/02-troubleshooting-drills.md
+  - Labs: 06-labs/README.md
+  - Certification: 07-certification/README.md

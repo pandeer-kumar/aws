@@ -2,6 +2,8 @@
 
 A GitHub-style study guide for a **software engineer moving into cloud/DevOps/SRE and solutions architecture roles**. It covers how AWS works internally, why it's built that way, how it fails, and how to keep systems running. It includes real architecture deep dives (Netflix, AWS's own outages), a GenAI/Bedrock/AgentCore track for agentic engineers, and a map to the **SAP-C02** and **DOP-C02** Professional certifications.
 
+**📖 Read it as a website:** https://pandeer-kumar.github.io/aws/ (search, dark mode, mobile-friendly)
+
 > **Writing rule for every chapter:** *"If I were hiring an AWS engineer with 10 years of experience, what would I ask?"* Each chapter opens with that **Interviewer lens** and closes with **model answers**. No "what is the cloud" chapters.
 
 ---
